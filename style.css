@@ -9,12 +9,64 @@ body {
 }
 
 .card {
+  position: relative;
   background-color: #ffffff;
   border-radius: 16px;
   padding: 40px;
   text-align: center;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
   max-width: 360px;
+  z-index: 1;
+}
+
+.card::before {
+  content: "";
+  position: absolute;
+  inset: -4px;
+  border-radius: 20px;
+  background: conic-gradient(
+    from var(--glow-angle, 0deg),
+    #e53e3e,
+    #1a1a1a,
+    #e53e3e,
+    #ff6b6b,
+    #1a1a1a,
+    #e53e3e
+  );
+  z-index: -2;
+  animation: rotate-glow 4s linear infinite;
+}
+
+.card::after {
+  content: "";
+  position: absolute;
+  inset: -4px;
+  border-radius: 20px;
+  background: conic-gradient(
+    from var(--glow-angle, 0deg),
+    #e53e3e,
+    #1a1a1a,
+    #e53e3e,
+    #ff6b6b,
+    #1a1a1a,
+    #e53e3e
+  );
+  z-index: -1;
+  filter: blur(18px);
+  opacity: 0.75;
+  animation: rotate-glow 4s linear infinite;
+}
+
+@property --glow-angle {
+  syntax: "<angle>";
+  initial-value: 0deg;
+  inherits: false;
+}
+
+@keyframes rotate-glow {
+  to {
+    --glow-angle: 360deg;
+  }
 }
 
 .profile-image-frame {
